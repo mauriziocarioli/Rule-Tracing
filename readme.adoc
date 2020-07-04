@@ -1,0 +1,20 @@
+= Demo Rule Tracing
+
+Add the classes to the business automation project
+kmodule.xml
+as in this example:
+
+[source,XML]
+----
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <kbase name="my-kbase" default="true" eventProcessingMode="stream" equalsBehavior="equality">
+    <ksession name="my-production-ksession" type="stateless" default="true" clockType="realtime"/>
+    <ksession name="my-debug-ksession" type="stateful" default="false" clockType="pseudo">
+      <listeners>
+        <ruleRuntimeEventListener type="com.redhat.batigerteam.CustomRuleRuntimeEventListener"/>
+        <agendaEventListener type="com.redhat.batigerteam.CustomAgendaEventListener"/>
+      </listeners>
+    </ksession>
+  </kbase>
+</kmodule>
+----
